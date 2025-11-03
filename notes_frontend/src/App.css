@@ -1,104 +1,261 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme Variables */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  /* Theme palette */
+  --color-primary: #2563EB;
+  --color-secondary: #F59E0B;
+  --color-success: #10B981;
+  --color-error: #EF4444;
+
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+  --radius: 12px;
+
+  /* Component tokens */
+  --sidebar-width: 320px;
+  --transition: 180ms ease;
 }
 
+/* Dark mode support through [data-theme="dark"] */
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --bg: #0f172a;
+  --surface: #0b1220;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --border: #1f2937;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 6px 14px rgba(0,0,0,0.35);
 }
 
+/* App root */
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background: radial-gradient(1200px 800px at -10% -20%, rgba(37, 99, 235, 0.12), transparent 50%) var(--bg);
+  color: var(--text);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
+/* Layout */
+.notes-app {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
   min-height: 100vh;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 40%), var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 16px;
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  gap: 10px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.brand .logo {
+  width: 12px;
+  height: 28px;
+  background: linear-gradient(180deg, var(--color-primary), #1d4ed8);
+  border-radius: 3px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+.brand .title {
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* Search */
+.search {
+  display: flex;
+  gap: 8px;
+}
+.input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.input:focus {
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+/* Buttons */
+.btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-primary {
+  background: linear-gradient(180deg, var(--color-primary), #1d4ed8);
+  color: white;
+  border-color: transparent;
+}
+.btn-danger {
+  background: linear-gradient(180deg, var(--color-error), #b91c1c);
+  color: white;
+  border-color: transparent;
+}
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Notes list */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: auto;
+}
+.note-list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.note-list-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.note-list-item.active {
+  border-color: rgba(37, 99, 235, 0.5);
+  background: linear-gradient(0deg, rgba(37, 99, 235, 0.06), transparent 60%);
+}
+.note-title {
+  font-weight: 600;
+}
+.note-meta {
+  font-size: 12px;
+  color: var(--muted);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* Main panel */
+.main {
+  padding: 24px;
+}
+.panel {
+  height: calc(100vh - 48px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+}
+.header .title-area {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.header .title-input {
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.header .title-input:focus {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* Editor */
+.editor {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 16px;
+  gap: 12px;
+}
+.editor .body {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  outline: none;
+  resize: none;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.empty-state {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--muted);
+}
+kbd {
+  background: #11182710;
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .notes-app {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+  .sidebar {
+    order: 2;
   }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .main {
+    order: 1;
   }
 }
